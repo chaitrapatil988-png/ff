@@ -46,7 +46,7 @@
       document.body.style.overflow = navbar.classList.contains('open') ? 'hidden' : '';
     });
     // Close mobile menu when a link is clicked
-    document.querySelectorAll('.nav-links a').forEach(link => {
+    document.querySelectorAll('.nav-links a, .nav-actions a, .nav-actions button').forEach(link => {
       link.addEventListener('click', () => {
         navbar.classList.remove('open');
         document.body.style.overflow = '';
