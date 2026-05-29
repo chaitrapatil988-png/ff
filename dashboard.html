@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — Stackly Farm</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="dashboard-page">
+  <nav id="navbar">
+    <a class="nav-logo" href="index.html"><img src="logo.webp" alt="Stackly Farm Logo"></a>
+    <div class="hamburger"><span></span><span></span><span></span></div>
+  </nav>
+
+  <div class="dashboard-pro">
+    <div class="dashboard-header fade-up">
+      <div class="dashboard-header-left">
+        <div class="breadcrumb">Dashboard</div>
+        <h2 class="dashboard-title">Farm Analytics Center</h2>
+        <div class="dashboard-sub">Real-time crop monitoring, field insights, and farm operations</div>
+      </div>
+      <div class="topbar-actions">
+        <div id="userRole" class="role-pill"></div>
+        <input id="dashSearch" class="search-input" placeholder="Search fields, sensors..." aria-label="Search dashboard">
+        <button id="exportTop" class="btn btn-ghost ripple-btn" style="padding:10px 18px; font-size:13px;">📊 Export</button>
+        <button id="logoutBtn" class="btn btn-solid ripple-btn" style="padding:10px 18px; font-size:13px;">Logout</button>
+      </div>
+    </div>
+
+    <div class="dashboard-topbar card fade-up">
+      <div class="topbar-welcome">
+        <h3 id="welcome" class="dashboard-welcome">Welcome to Your Farm Dashboard</h3>
+        <p class="dashboard-welcome-sub">Monitor your fields in real-time, track sensor readings, and optimize your farming operations with AI-powered insights.</p>
+      </div>
+      <div class="summary-pill-grid">
+        <div class="summary-pill fade-up delay-1">
+          <strong>🌾 Fields</strong>
+          <span id="fieldsCount">—</span>
+        </div>
+        <div class="summary-pill fade-up delay-2">
+          <strong>🔌 Sensors</strong>
+          <span id="sensorCount">—</span>
+        </div>
+        <div class="summary-pill fade-up delay-3">
+          <strong>⭐ Health Score</strong>
+          <span>92%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="dashboard-layout">
+      <aside class="dashboard-sidebar zoom-in">
+        <div class="profile">
+          <img src="logo.webp" alt="avatar">
+          <div>
+            <div style="font-weight:700">Stackly Farmer</div>
+            <div style="font-size:13px;color:var(--muted)" id="sidebarEmail">—</div>
+          </div>
+        </div>
+        <nav class="nav">
+          <a href="#overview" class="active" data-tab="overview">📊 Overview</a>
+          <a href="#fields" data-tab="fields">🌾 My Fields</a>
+          <a href="#sensors" data-tab="sensors">🔌 Sensors</a>
+          <a href="#reports" data-tab="reports">📈 Reports</a>
+          <a href="#settings" data-tab="settings">⚙️ Settings</a>
+          <a href="contact.html">✉️ Support</a>
+          <a href="index.html" id="sidebarLogout" style="margin-top:12px;color:var(--g400);font-weight:700">🔓 Logout</a>
+        </nav>
+      </aside>
+
+      <main class="dashboard-main">
+        <!-- Overview Pane -->
+        <div id="tab-overview" class="tab-pane active">
+          <section class="kpi-grid">
+            <div class="kpi-card fade-up delay-1">
+              <div class="kpi-icon">🌾</div>
+              <div>
+                <div class="kpi-value dashboard-counter" data-target="3" id="totalFarms">0</div>
+                <div class="kpi-label">Total Farms</div>
+              </div>
+            </div>
+            <div class="kpi-card fade-up delay-2">
+              <div class="kpi-icon">🔌</div>
+              <div>
+                <div class="kpi-value dashboard-counter" data-target="12" id="activeSensors">0</div>
+                <div class="kpi-label">Active Sensors</div>
+              </div>
+            </div>
+            <div class="kpi-card fade-up delay-3">
+              <div class="kpi-icon">📈</div>
+              <div>
+                <div class="kpi-value dashboard-counter" data-target="2.4" data-suffix="t" id="monthlyYield">0</div>
+                <div class="kpi-label">Monthly Yield</div>
+              </div>
+            </div>
+            <div class="kpi-card fade-up delay-4">
+              <div class="kpi-icon">👥</div>
+              <div>
+                <div class="kpi-value dashboard-counter" data-target="7" id="connectedUsers">0</div>
+                <div class="kpi-label">Team Members</div>
+              </div>
+            </div>
+          </section>
+
+          <div class="main-grid">
+            <div class="dashboard-column-left">
+              <div class="panel fade-up">
+                <div class="card-header">
+                  <div>
+                    <h3>Yield Trend</h3>
+                    <div class="card-subtitle">Monthly production trend</div>
+                  </div>
+                  <button id="toggleYield" class="btn btn-ghost ripple-btn">Range</button>
+                </div>
+                <div class="chart-wrap">
+                  <canvas id="yieldChart"></canvas>
+                </div>
+              </div>
+
+              <div class="panel fade-up">
+                <div class="card-header">
+                  <div>
+                    <h3>Sensor Activity</h3>
+                    <div class="card-subtitle">Last 7 days sensor reports</div>
+                  </div>
+                </div>
+                <div class="chart-wrap">
+                  <canvas id="sensorChart"></canvas>
+                </div>
+              </div>
+            </div>
+
+            <aside class="dashboard-column-right">
+              <div class="panel fade-up delay-3">
+                <h4>Activity Feed</h4>
+                <div id="activityFeed" class="activity-list">
+                  <div class="activity-item fade-up delay-1"><strong>Support</strong> · New ticket created — 2h ago</div>
+                  <div class="activity-item fade-up delay-2"><strong>Sensor</strong> · Soil moisture low on Field A — 5h ago</div>
+                  <div class="activity-item fade-up delay-3"><strong>Report</strong> · Monthly yield estimate updated — 1d ago</div>
+                </div>
+              </div>
+
+              <div class="panel fade-up delay-4">
+                <h4>Quick Actions</h4>
+                <div class="quick-actions">
+                  <button class="btn btn-ghost ripple-btn" id="openContact2">Contact Support</button>
+                  <button class="btn btn-solid ripple-btn" id="viewReports2" style="background:var(--g400);color:var(--white)">View Reports</button>
+                  <button class="btn btn-ghost ripple-btn" id="exportReport2">Export CSV</button>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+
+        <!-- Fields Pane -->
+        <div id="tab-fields" class="tab-pane">
+          <div class="form-panel fade-up">
+            <div class="form-panel-header">
+              <h3>🌾 Register New Field</h3>
+              <p>Add a new field to your farm for monitoring and management</p>
+            </div>
+            <form id="addFieldForm" class="form-grid">
+              <div class="auth-form-group">
+                <label class="form-label">Field Name *</label>
+                <input type="text" id="fName" class="form-input" placeholder="e.g. East Valley" required>
+              </div>
+              <div class="auth-form-group">
+                <label class="form-label">Crop Type *</label>
+                <input type="text" id="fCrop" class="form-input" placeholder="e.g. Barley" required>
+              </div>
+              <div class="auth-form-group">
+                <label class="form-label">Area (Acres) *</label>
+                <input type="number" id="fArea" class="form-input" placeholder="e.g. 10" min="1" required>
+              </div>
+              <div class="auth-form-group">
+                <label class="form-label">Current Status *</label>
+                <select id="fStatus" class="form-input" required>
+                  <option value="">Select status...</option>
+                  <option value="growing">Growing</option>
+                  <option value="dry">Dry (Needs Irrigation)</option>
+                  <option value="harvested">Harvested</option>
+                </select>
+              </div>
+              <div style="grid-column: 1 / -1;">
+                <button type="submit" class="btn btn-solid ripple-btn" style="padding:12px 24px; width: 100%; font-size: 14px; font-weight: 600;">➕ Create Field</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="panel fade-up">
+            <div class="card-header">
+              <div>
+                <h3>📋 My Fields</h3>
+                <div class="card-subtitle">Monitor all your active fields and crop status</div>
+              </div>
+            </div>
+            <div id="fieldsGrid" class="fields-grid">
+              <!-- Dynamically populated fields -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Sensors Pane -->
+        <div id="tab-sensors" class="tab-pane">
+          <div class="form-panel fade-up">
+            <div class="form-panel-header">
+              <h3>🔌 Provision New IoT Sensor</h3>
+              <p>Deploy a new sensor to collect real-time field data</p>
+            </div>
+            <form id="addSensorForm" class="form-grid">
+              <div class="auth-form-group">
+                <label class="form-label">Sensor Name *</label>
+                <input type="text" id="sName" class="form-input" placeholder="e.g. Moisture C3" required>
+              </div>
+              <div class="auth-form-group">
+                <label class="form-label">Sensor Type *</label>
+                <select id="sType" class="form-input" required>
+                  <option value="">Select sensor type...</option>
+                  <option value="Moisture">Soil Moisture</option>
+                  <option value="Temperature">Temperature</option>
+                  <option value="Humidity">Humidity</option>
+                  <option value="pH">Soil pH</option>
+                  <option value="Light">Light Level</option>
+                </select>
+              </div>
+              <div class="auth-form-group">
+                <label class="form-label">Bind to Field *</label>
+                <select id="sFieldBind" class="form-input" required>
+                  <!-- Dynamically populated fields list -->
+                </select>
+              </div>
+              <div class="auth-form-group">
+                <label class="form-label">Initial Status *</label>
+                <select id="sStatus" class="form-input" required>
+                  <option value="">Select status...</option>
+                  <option value="active">Active</option>
+                  <option value="warning">Warning</option>
+                  <option value="offline">Offline</option>
+                </select>
+              </div>
+              <div style="grid-column: 1 / -1;">
+                <button type="submit" class="btn btn-solid ripple-btn" style="padding:12px 24px; width: 100%; font-size: 14px; font-weight: 600;">✅ Provision Sensor</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="panel">
+            <div class="card-header" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
+              <div>
+                <h3>IoT Sensor Network</h3>
+                <div class="card-subtitle">Real-time remote telemetry nodes</div>
+              </div>
+              <div style="display:flex; align-items:center; gap:16px;">
+                <div class="telemetry-status">
+                  <span id="telemetryDot" class="telemetry-dot"></span>
+                  <span id="telemetryText">Live Telemetry</span>
+                </div>
+                <button id="btnSimulate" class="btn btn-ghost ripple-btn" style="padding:10px 18px; font-size:13px;">Simulate Readings</button>
+              </div>
+            </div>
+            <div id="sensorsGrid" class="sensors-grid">
+              <!-- Dynamically populated sensors -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Reports Pane -->
+        <div id="tab-reports" class="tab-pane">
+          <div class="panel">
+            <div class="card-header" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; margin-bottom: 24px;">
+              <div>
+                <h3>Platform Reports & Logs</h3>
+                <div class="card-subtitle">Generate custom crop analytics, harvest datasets, and export CSV logs</div>
+              </div>
+              <div style="display:flex; gap:10px;">
+                <button id="btnExportReports" class="btn btn-solid ripple-btn" style="padding:12px 20px; font-size:13px; background:var(--g400); color:var(--white)">Export CSV</button>
+              </div>
+            </div>
+
+            <div class="reports-filter-row">
+              <div class="auth-form-group" style="margin-bottom:0; flex:1; min-width:180px;">
+                <label class="form-label" style="font-size:12px;">Filter Field</label>
+                <select id="repFilterField" class="form-input" style="padding:10px 14px;">
+                  <option value="all">All Fields</option>
+                  <!-- Dynamically populated -->
+                </select>
+              </div>
+              <div class="auth-form-group" style="margin-bottom:0; flex:1; min-width:180px;">
+                <label class="form-label" style="font-size:12px;">Filter Crop</label>
+                <select id="repFilterCrop" class="form-input" style="padding:10px 14px;">
+                  <option value="all">All Crops</option>
+                  <!-- Dynamically populated -->
+                </select>
+              </div>
+              <div class="auth-form-group" style="margin-bottom:0; flex:1; min-width:180px;">
+                <label class="form-label" style="font-size:12px;">Filter Date</label>
+                <input type="date" id="repFilterDate" class="form-input" style="padding:10px 14px;">
+              </div>
+            </div>
+
+            <div class="reports-table-wrap">
+              <table class="reports-table">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Field Name</th>
+                    <th>Crop</th>
+                    <th>Soil Moisture</th>
+                    <th>Yield Forecast</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="reportsTableBody">
+                  <!-- Dynamically populated data rows -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Settings Pane -->
+        <div id="tab-settings" class="tab-pane">
+          <div class="form-panel settings-pane">
+            <h3>⚙️ Account Settings</h3>
+            <p class="dashboard-welcome-sub" style="margin-bottom:24px;">Configure your farm details, profile metadata, and system preferences.</p>
+            
+            <form id="settingsDashboardForm" style="display:grid; gap:16px;">
+              <div class="auth-form-group">
+                <label class="form-label">Farmer Full Name</label>
+                <input id="dsFullName" class="form-input" type="text" placeholder="John Doe" required>
+              </div>
+
+              <div class="auth-form-group">
+                <label class="form-label">Email Address</label>
+                <input id="dsEmail" class="form-input" type="email" placeholder="you@example.com" required>
+              </div>
+
+              <div class="auth-form-group">
+                <label class="form-label">Farm/Business Name</label>
+                <input id="dsFarmName" class="form-input" type="text" placeholder="e.g. Green Acres" required>
+              </div>
+
+              <div class="auth-form-group">
+                <label class="form-label">Operational Role</label>
+                <select id="dsRole" class="form-input" required>
+                  <option value="farmer">Farmer</option>
+                  <option value="agri_business">Agri Business</option>
+                  <option value="consultant">Agricultural Consultant</option>
+                  <option value="investor">Investor</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+
+              <div style="display:flex; gap:12px; margin-top:8px;">
+                <button type="submit" class="btn btn-solid ripple-btn" style="padding:14px 28px;">Save Settings</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <a class="footer-logo" href="index.html"><img src="logo.webp" alt="Stackly Farm Logo"></a>
+        <div class="footer-desc">Premium agriculture solutions for smart farming, organic production, and sustainable future growth. Bridging tradition and technology since 2001.</div>
+        <div class="footer-socials">
+          <a class="footer-social" href="404.html">𝕏</a>
+          <a class="footer-social" href="404.html">in</a>
+          <a class="footer-social" href="404.html">f</a>
+          <a class="footer-social" href="404.html">▶</a>
+          <a class="footer-social" href="404.html">ig</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Navigation</div>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Services</div>
+        <ul class="footer-links">
+          <li><a href="services.html">Organic Farming</a></li>
+          <li><a href="services.html">Smart Agriculture</a></li>
+          <li><a href="services.html">Crop Management</a></li>
+          <li><a href="services.html">Modern Equipment</a></li>
+          <li><a href="services.html">AI Analytics</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Contact</div>
+        <ul class="footer-links" style="gap:12px">
+          <li style="color:rgba(255,255,255,.5);font-size:14px">📍 Bangalore, Karnataka, India</li>
+          <li style="color:rgba(255,255,255,.5);font-size:14px">📞 +91 98881 55661</li>
+          <li style="color:rgba(255,255,255,.5);font-size:14px">✉️ hello@stackly.com</li>
+          <li style="color:rgba(255,255,255,.5);font-size:14px">🕐 Mon–Sat, 9AM–6PM IST</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Stackly Farm. All Rights Reserved.</span>
+      <span>Smart Agriculture Solutions</span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    // Populate dashboard with user data from localStorage and wire actions
+    (function(){
+      'use strict';
+
+      // ── STATE & LOCALSTORAGE STORAGE INITIALIZER ──
+      let user = null;
+      let fields = [];
+      let sensors = [];
+      let activities = [];
+      let logs = [];
+
+      function loadStateFromStorage() {
+        try {
+          const rawUser = localStorage.getItem('stackly_user');
+          if (!rawUser) {
+            window.location.href = 'auth.html?mode=login';
+            return;
+          }
+          user = JSON.parse(rawUser);
+
+          // Fields
+          const rawFields = localStorage.getItem('stackly_fields');
+          if (rawFields) {
+            fields = JSON.parse(rawFields);
+          } else {
+            fields = [
+              { id: 'f1', name: 'North Field', crop: 'Wheat', area: 12, health: 94, moisture: 48, status: 'growing' },
+              { id: 'f2', name: 'Valley Vineyard', crop: 'Grapes', area: 8, health: 89, moisture: 35, status: 'dry' },
+              { id: 'f3', name: 'South Orchard', crop: 'Apples', area: 15, health: 91, moisture: 52, status: 'growing' }
+            ];
+            localStorage.setItem('stackly_fields', JSON.stringify(fields));
+          }
+
+          // Sensors
+          const rawSensors = localStorage.getItem('stackly_sensors');
+          if (rawSensors) {
+            sensors = JSON.parse(rawSensors);
+          } else {
+            sensors = [
+              { id: 's1', name: 'Moisture A1', type: 'Moisture', reading: '48%', status: 'active', fieldId: 'f1' },
+              { id: 's2', name: 'Temp A2', type: 'Temperature', reading: '24°C', status: 'active', fieldId: 'f1' },
+              { id: 's3', name: 'Moisture B1', type: 'Moisture', reading: '35%', status: 'warning', fieldId: 'f2' },
+              { id: 's4', name: 'pH B2', type: 'pH', reading: '6.5', status: 'active', fieldId: 'f2' },
+              { id: 's5', name: 'Moisture C1', type: 'Moisture', reading: '52%', status: 'active', fieldId: 'f3' },
+              { id: 's6', name: 'Temp C2', type: 'Temperature', reading: '26°C', status: 'active', fieldId: 'f3' }
+            ];
+            localStorage.setItem('stackly_sensors', JSON.stringify(sensors));
+          }
+
+          // Activities
+          const rawActivities = localStorage.getItem('stackly_activities');
+          if (rawActivities) {
+            activities = JSON.parse(rawActivities);
+          } else {
+            activities = [
+              { id: 'a1', category: 'Support', text: 'New support ticket #4912 created', time: '2 hours ago' },
+              { id: 'a2', category: 'Sensor', text: 'Moisture warning: Soil moisture low on Valley Vineyard', time: '5 hours ago' },
+              { id: 'a3', category: 'Report', text: 'Monthly crop yield forecasts compiled', time: '1 day ago' }
+            ];
+            localStorage.setItem('stackly_activities', JSON.stringify(activities));
+          }
+
+          // Logs (reports data)
+          const rawLogs = localStorage.getItem('stackly_logs');
+          if (rawLogs) {
+            logs = JSON.parse(rawLogs);
+          } else {
+            logs = [
+              { date: '2026-05-27', field: 'North Field', crop: 'Wheat', moisture: '48%', yield: '2.4t', status: 'Optimal' },
+              { date: '2026-05-26', field: 'Valley Vineyard', crop: 'Grapes', moisture: '35%', yield: '1.2t', status: 'Irrigate' },
+              { date: '2026-05-26', field: 'South Orchard', crop: 'Apples', moisture: '52%', yield: '3.1t', status: 'Optimal' },
+              { date: '2026-05-25', field: 'North Field', crop: 'Wheat', moisture: '49%', yield: '2.3t', status: 'Optimal' },
+              { date: '2026-05-24', field: 'Valley Vineyard', crop: 'Grapes', moisture: '37%', yield: '1.2t', status: 'Optimal' },
+              { date: '2026-05-23', field: 'South Orchard', crop: 'Apples', moisture: '53%', yield: '3.0t', status: 'Optimal' }
+            ];
+            localStorage.setItem('stackly_logs', JSON.stringify(logs));
+          }
+        } catch (e) {
+          console.error('Error reading localStorage', e);
+        }
+      }
+
+      function saveFields() {
+        localStorage.setItem('stackly_fields', JSON.stringify(fields));
+      }
+
+      function saveSensors() {
+        localStorage.setItem('stackly_sensors', JSON.stringify(sensors));
+      }
+
+      function addActivity(category, text) {
+        const item = {
+          id: 'a_' + Date.now(),
+          category,
+          text,
+          time: 'Just now'
+        };
+        activities.unshift(item);
+        if (activities.length > 8) activities.pop();
+        localStorage.setItem('stackly_activities', JSON.stringify(activities));
+        renderActivities();
+      }
+
+      function addLog(field, crop, moisture, yieldVal, status) {
+        const dateStr = new Date().toISOString().split('T')[0];
+        const logItem = {
+          date: dateStr,
+          field,
+          crop,
+          moisture,
+          yield: yieldVal,
+          status
+        };
+        logs.unshift(logItem);
+        localStorage.setItem('stackly_logs', JSON.stringify(logs));
+      }
+
+      // ── RENDERING FUNCTIONS ──
+      
+      // Render dynamic profile information in Header & Sidebar
+      function renderProfileInfo() {
+        if (!user) return;
+        const welcome = document.getElementById('welcome');
+        const userRole = document.getElementById('userRole');
+        const sidebarEmail = document.getElementById('sidebarEmail');
+        const fieldsCount = document.getElementById('fieldsCount');
+
+        if (welcome) welcome.textContent = `Welcome, ${user.fullName || user.email || 'Farmer'}`;
+        if (userRole) userRole.textContent = user.role ? user.role.replace('_',' ') : 'Farmer';
+        if (sidebarEmail) sidebarEmail.textContent = user.email || '—';
+        if (fieldsCount) fieldsCount.textContent = fields.length;
+
+        // Settings Forms
+        const dsFullName = document.getElementById('dsFullName');
+        const dsEmail = document.getElementById('dsEmail');
+        const dsFarmName = document.getElementById('dsFarmName');
+        const dsRole = document.getElementById('dsRole');
+
+        if (dsFullName) dsFullName.value = user.fullName || '';
+        if (dsEmail) dsEmail.value = user.email || '';
+        if (dsFarmName) dsFarmName.value = user.farmName || '';
+        if (dsRole) dsRole.value = user.role || '';
+      }
+
+      function runCounterAnimations() {
+        document.querySelectorAll('.dashboard-counter').forEach(el => {
+          const target = parseFloat(el.getAttribute('data-target') || 0);
+          const suffix = el.getAttribute('data-suffix') || '';
+          animateNumber(el, target, suffix);
+        });
+      }
+
+      function animateNumber(el, target, suffix) {
+        let start = 0;
+        const duration = 1200;
+        const startValue = 0;
+        const step = timestamp => {
+          if (!start) start = timestamp;
+          const progress = Math.min((timestamp - start) / duration, 1);
+          const eased = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+          const val = startValue + eased * (target - startValue);
+          
+          if (Number.isInteger(target)) {
+            el.textContent = Math.floor(val) + suffix;
+          } else {
+            el.textContent = val.toFixed(1) + suffix;
+          }
+          
+          if (progress < 1) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+      }
+
+      // Dynamic KPI counter animation values
+      function updateKPIs() {
+        const totalFarms = document.getElementById('totalFarms');
+        const activeSensors = document.getElementById('activeSensors');
+        const monthlyYield = document.getElementById('monthlyYield');
+
+        if (totalFarms) {
+          totalFarms.dataset.target = fields.length;
+        }
+
+        if (activeSensors) {
+          const activeCount = sensors.filter(s => s.status === 'active').length;
+          activeSensors.dataset.target = activeCount;
+        }
+
+        if (monthlyYield) {
+          const totalArea = fields.reduce((acc, curr) => acc + parseFloat(curr.area || 0), 0);
+          const yieldEstimate = (totalArea * 0.16).toFixed(1);
+          monthlyYield.dataset.target = yieldEstimate;
+          monthlyYield.dataset.suffix = 't';
+        }
+        
+        runCounterAnimations();
+      }
+
+      // Render fields grid
+      function renderFields() {
+        const grid = document.getElementById('fieldsGrid');
+        if (!grid) return;
+        grid.innerHTML = '';
+
+        fields.forEach(f => {
+          const card = document.createElement('div');
+          card.className = 'field-card fade-up visible';
+          
+          let tagClass = 'tag-growing';
+          let statusText = 'Growing';
+          if (f.status === 'dry') { tagClass = 'tag-dry'; statusText = 'Dry (Needs Water)'; }
+          else if (f.status === 'harvested') { tagClass = 'tag-harvested'; statusText = 'Harvested'; }
+
+          card.innerHTML = `
+            <span class="card-tag ${tagClass}">${statusText}</span>
+            <h4 style="font-family:var(--font-head); font-size:20px; font-weight:600; color:var(--dark); margin-bottom:6px;">${f.name}</h4>
+            <div style="font-size:13px; color:var(--muted); margin-bottom:16px;">Crop: <strong style="color:var(--dark);">${f.crop}</strong> · Area: ${f.area} Acres</div>
+            
+            <div class="metric-row">
+              <span>Soil Moisture</span>
+              <strong style="color:var(--g400);">${f.moisture}%</strong>
+            </div>
+            <div class="metric-bar">
+              <div class="metric-bar-fill" data-width="${f.moisture}%" style="width: 0%; background: ${f.moisture < 40 ? 'var(--accent)' : 'var(--g400)'}"></div>
+            </div>
+
+            <div class="metric-row" style="margin-top:6px;">
+              <span>Soil Health Score</span>
+              <strong style="color:var(--text);">${f.health}%</strong>
+            </div>
+            <div class="metric-bar">
+              <div class="metric-bar-fill" data-width="${f.health}%" style="width: 0%; background: #228b22;"></div>
+            </div>
+
+            <div class="card-actions">
+              <button class="btn btn-ghost btn-small ripple-btn delete-field-btn" data-id="${f.id}">Delete</button>
+            </div>
+          `;
+          grid.appendChild(card);
+        });
+
+        // Trigger transition animation
+        setTimeout(() => {
+          grid.querySelectorAll('.metric-bar-fill').forEach(fill => {
+            fill.style.width = fill.getAttribute('data-width');
+          });
+        }, 50);
+
+        // Bind delete buttons
+        grid.querySelectorAll('.delete-field-btn').forEach(btn => {
+          btn.addEventListener('click', function() {
+            const id = this.dataset.id;
+            deleteField(id);
+          });
+        });
+
+        // Re-populate bind fields select dropdown in sensor provision form
+        populateFieldsDropdowns();
+      }
+
+      // Populate dropdown selectors in forms
+      function populateFieldsDropdowns() {
+        const selectBind = document.getElementById('sFieldBind');
+        const filterField = document.getElementById('repFilterField');
+
+        if (selectBind) {
+          selectBind.innerHTML = '<option value="">Select Field</option>';
+          fields.forEach(f => {
+            selectBind.innerHTML += `<option value="${f.id}">${f.name}</option>`;
+          });
+        }
+
+        if (filterField) {
+          const currentVal = filterField.value;
+          filterField.innerHTML = '<option value="all">All Fields</option>';
+          fields.forEach(f => {
+            filterField.innerHTML += `<option value="${f.name}">${f.name}</option>`;
+          });
+          filterField.value = currentVal || 'all';
+        }
+      }
+
+      // Delete field
+      function deleteField(id) {
+        const fieldIndex = fields.findIndex(f => f.id === id);
+        if (fieldIndex === -1) return;
+        const fieldName = fields[fieldIndex].name;
+        
+        // Remove associated sensors
+        sensors = sensors.filter(s => s.fieldId !== id);
+        saveSensors();
+        
+        fields.splice(fieldIndex, 1);
+        saveFields();
+        
+        addActivity('Field', `Field "${fieldName}" was unregistered`);
+        renderFields();
+        renderSensors();
+        updateKPIs();
+        renderProfileInfo();
+        populateReportFilters();
+        renderLogs();
+      }
+
+      // Render Sensors Grid
+      function renderSensors() {
+        const grid = document.getElementById('sensorsGrid');
+        if (!grid) return;
+        grid.innerHTML = '';
+
+        sensors.forEach(s => {
+          const card = document.createElement('div');
+          card.className = 'sensor-card fade-up visible';
+
+          let tagClass = 'tag-active';
+          let statusText = 'Active';
+          if (s.status === 'warning') { tagClass = 'tag-warning'; statusText = 'Warning'; }
+          else if (s.status === 'offline') { tagClass = 'tag-offline'; statusText = 'Offline'; }
+
+          const fieldName = fields.find(f => f.id === s.fieldId)?.name || 'Unassigned';
+
+          card.innerHTML = `
+            <span class="card-tag ${tagClass}">${statusText}</span>
+            <h4 style="font-family:var(--font-head); font-size:18px; font-weight:600; color:var(--dark); margin-bottom:4px;">${s.name}</h4>
+            <div style="font-size:12px; color:var(--muted); margin-bottom:14px;">Type: <strong style="color:var(--dark);">${s.type}</strong></div>
+            
+            <div style="background:rgba(var(--dark-rgb),0.03); border-radius:12px; padding:12px 14px; margin-bottom:16px; display:flex; justify-content:space-between; align-items:center;">
+              <span style="font-size:13px; color:var(--muted);">Current Value:</span>
+              <strong style="font-size:18px; font-weight:700; color:var(--dark);">${s.reading}</strong>
+            </div>
+
+            <div style="font-size:13px; color:var(--muted); margin-bottom:14px;">Linked field: <strong style="color:var(--text);">${fieldName}</strong></div>
+
+            <div class="card-actions">
+              <button class="btn btn-ghost btn-small ripple-btn delete-sensor-btn" data-id="${s.id}">Remove</button>
+            </div>
+          `;
+          grid.appendChild(card);
+        });
+
+        // Bind delete buttons
+        grid.querySelectorAll('.delete-sensor-btn').forEach(btn => {
+          btn.addEventListener('click', function() {
+            const id = this.dataset.id;
+            deleteSensor(id);
+          });
+        });
+      }
+
+      // Delete sensor
+      function deleteSensor(id) {
+        const sensorIndex = sensors.findIndex(s => s.id === id);
+        if (sensorIndex === -1) return;
+        const sensorName = sensors[sensorIndex].name;
+        
+        sensors.splice(sensorIndex, 1);
+        saveSensors();
+        
+        addActivity('Sensor', `IoT Sensor Node "${sensorName}" removed`);
+        renderSensors();
+        updateKPIs();
+      }
+
+      // Render Activity list
+      function renderActivities() {
+        const feed = document.getElementById('activityFeed');
+        if (!feed) return;
+        feed.innerHTML = '';
+        
+        activities.forEach((act, idx) => {
+          const item = document.createElement('div');
+          item.className = `activity-item fade-up delay-${idx+1} visible`;
+          item.innerHTML = `<strong>${act.category}</strong> · ${act.text} — ${act.time}`;
+          feed.appendChild(item);
+        });
+      }
+
+      // Render log report lines
+      function renderLogs() {
+        const tbody = document.getElementById('reportsTableBody');
+        if (!tbody) return;
+        tbody.innerHTML = '';
+
+        const filterField = document.getElementById('repFilterField').value;
+        const filterCrop = document.getElementById('repFilterCrop').value;
+        const filterDate = document.getElementById('repFilterDate').value;
+
+        const filtered = logs.filter(log => {
+          if (filterField !== 'all' && log.field !== filterField) return false;
+          if (filterCrop !== 'all' && log.crop !== filterCrop) return false;
+          if (filterDate && log.date !== filterDate) return false;
+          return true;
+        });
+
+        if (filtered.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; color:var(--muted); padding:24px;">No matching operational logs found. Try adjusting filters.</td></tr>`;
+          return;
+        }
+
+        filtered.forEach(log => {
+          const tr = document.createElement('tr');
+          const badgeStyle = log.status === 'Optimal' 
+            ? 'color:#228b22; font-weight:700' 
+            : 'color:#d97706; font-weight:700';
+
+          tr.innerHTML = `
+            <td>${log.date}</td>
+            <td style="font-weight:500; color:var(--dark);">${log.field}</td>
+            <td>${log.crop}</td>
+            <td>${log.moisture}</td>
+            <td>${log.yield}</td>
+            <td style="${badgeStyle}">${log.status}</td>
+          `;
+          tbody.appendChild(tr);
+        });
+      }
+
+      // Populate crops list dynamically in report dropdown filters
+      function populateReportFilters() {
+        const filterCrop = document.getElementById('repFilterCrop');
+        if (!filterCrop) return;
+        
+        const currentVal = filterCrop.value;
+        
+        // Extract unique crops
+        const uniqueCrops = ['Wheat', 'Grapes', 'Apples'];
+        fields.forEach(f => {
+          if (f.crop && !uniqueCrops.includes(f.crop)) {
+            uniqueCrops.push(f.crop);
+          }
+        });
+
+        filterCrop.innerHTML = '<option value="all">All Crops</option>';
+        uniqueCrops.forEach(c => {
+          filterCrop.innerHTML += `<option value="${c}">${c}</option>`;
+        });
+        filterCrop.value = currentVal || 'all';
+      }
+
+      // ── ROUTING & TAB NAVIGATION SYSTEM ──
+      
+      function activateTab(tabId) {
+        // Toggle Sidebar Active styling
+        document.querySelectorAll('.dashboard-sidebar .nav a[data-tab]').forEach(a => {
+          a.classList.toggle('active', a.dataset.tab === tabId);
+        });
+
+        // Toggle Views
+        document.querySelectorAll('.tab-pane').forEach(pane => {
+          pane.classList.remove('active');
+        });
+        const activePane = document.getElementById(`tab-${tabId}`);
+        if (activePane) {
+          activePane.classList.add('active');
+        }
+
+        // Trigger animations based on active tab
+        if (tabId === 'overview') {
+          runCounterAnimations();
+        } else if (tabId === 'fields') {
+          renderFields();
+        }
+
+        // Auto trigger size adjustments if charts exist
+        window.dispatchEvent(new Event('resize'));
+      }
+
+      function setupRouting() {
+        // Hash routing
+        const handleHashChange = () => {
+          const hash = window.location.hash.substring(1) || 'overview';
+          const validTabs = ['overview', 'fields', 'sensors', 'reports', 'settings'];
+          if (validTabs.includes(hash)) {
+            activateTab(hash);
+          }
+        };
+
+        window.addEventListener('hashchange', handleHashChange);
+        
+        // Initial route parse
+        handleHashChange();
+
+        // Wire click handlers to tab links
+        document.querySelectorAll('.dashboard-sidebar .nav a[data-tab]').forEach(a => {
+          a.addEventListener('click', function(e) {
+            e.preventDefault();
+            const tabId = this.dataset.tab;
+            window.location.hash = tabId;
+          });
+        });
+      }
+
+
+      // ── SUBMIT FORM HANDLERS ──
+
+      function setupFormHandlers() {
+        // Field Form
+        const addFieldForm = document.getElementById('addFieldForm');
+        if (addFieldForm) {
+          addFieldForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('fName').value.trim();
+            const crop = document.getElementById('fCrop').value.trim();
+            const area = parseInt(document.getElementById('fArea').value);
+            const status = document.getElementById('fStatus').value;
+
+            if (!name || !crop || isNaN(area)) return;
+
+            const newField = {
+              id: 'f_' + Date.now(),
+              name,
+              crop,
+              area,
+              health: Math.floor(Math.random() * 10) + 88, // 88% - 97% initial health
+              moisture: status === 'dry' ? 35 : 48,
+              status
+            };
+
+            fields.push(newField);
+            saveFields();
+            
+            addActivity('Field', `Field "${name}" was registered (${area} Acres, ${crop})`);
+            addLog(name, crop, newField.moisture + '%', (area * 0.16).toFixed(1) + 't', status === 'dry' ? 'Irrigate' : 'Optimal');
+
+            addFieldForm.reset();
+            renderFields();
+            updateKPIs();
+            renderProfileInfo();
+            populateReportFilters();
+            renderLogs();
+          });
+        }
+
+        // Sensor Form
+        const addSensorForm = document.getElementById('addSensorForm');
+        if (addSensorForm) {
+          addSensorForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('sName').value.trim();
+            const type = document.getElementById('sType').value;
+            const fieldId = document.getElementById('sFieldBind').value;
+            const status = document.getElementById('sStatus').value;
+
+            if (!name || !type || !fieldId) return;
+
+            let reading = '45%';
+            if (type === 'Temperature') reading = '22°C';
+            else if (type === 'Humidity') reading = '65%';
+            else if (type === 'pH') reading = '6.8';
+            else if (type === 'Light') reading = '75%';
+
+            const newSensor = {
+              id: 's_' + Date.now(),
+              name,
+              type,
+              reading,
+              status,
+              fieldId
+            };
+
+            sensors.push(newSensor);
+            saveSensors();
+
+            addActivity('Sensor', `IoT Node "${name}" provisioned for operational telemetry`);
+
+            addSensorForm.reset();
+            renderSensors();
+            updateKPIs();
+          });
+        }
+
+        // Settings Form (Dashboard Embedded)
+        const settingsForm = document.getElementById('settingsDashboardForm');
+        if (settingsForm) {
+          settingsForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const fullName = document.getElementById('dsFullName').value.trim();
+            const email = document.getElementById('dsEmail').value.trim();
+            const farmName = document.getElementById('dsFarmName').value.trim();
+            const role = document.getElementById('dsRole').value;
+
+            if (!fullName || !email || !farmName || !role) return;
+
+            const nameRegex = /^[A-Za-z\s]+$/;
+            if (!nameRegex.test(fullName)) {
+              alert('Farmer Full Name should contain only letters and spaces.');
+              return;
+            }
+
+            user.fullName = fullName;
+            user.email = email;
+            user.farmName = farmName;
+            user.role = role;
+
+            localStorage.setItem('stackly_user', JSON.stringify(user));
+            addActivity('Profile', `Account settings updated successfully`);
+
+            // Instantly refresh UI header titles
+            renderProfileInfo();
+            alert('Settings saved successfully!');
+          });
+        }
+
+        // Live Simulation Toggle
+        let simulationInterval = null;
+        const btnSimulate = document.getElementById('btnSimulate');
+        const telemetryDot = document.getElementById('telemetryDot');
+
+        if (btnSimulate) {
+          btnSimulate.addEventListener('click', function() {
+            if (simulationInterval) {
+              // Stop simulation
+              clearInterval(simulationInterval);
+              simulationInterval = null;
+              btnSimulate.textContent = 'Simulate Readings';
+              btnSimulate.className = 'btn btn-ghost ripple-btn';
+              if (telemetryDot) telemetryDot.classList.remove('simulating');
+            } else {
+              // Start simulation
+              simulationInterval = setInterval(simulateSensorFluctuations, 2000);
+              btnSimulate.textContent = 'Pause Simulation';
+              btnSimulate.className = 'btn btn-solid ripple-btn';
+              btnSimulate.style.background = '#228b22';
+              btnSimulate.style.color = '#fff';
+              if (telemetryDot) telemetryDot.classList.add('simulating');
+            }
+          });
+        }
+
+        // Reports filtering triggers
+        const repFilterField = document.getElementById('repFilterField');
+        const repFilterCrop = document.getElementById('repFilterCrop');
+        const repFilterDate = document.getElementById('repFilterDate');
+
+        if (repFilterField) repFilterField.addEventListener('change', renderLogs);
+        if (repFilterCrop) repFilterCrop.addEventListener('change', renderLogs);
+        if (repFilterDate) repFilterDate.addEventListener('change', renderLogs);
+      }
+
+      // Telemetry telemetry updates simulation helper
+      function simulateSensorFluctuations() {
+        sensors.forEach(s => {
+          if (s.status === 'offline') return;
+
+          let num = parseFloat(s.reading) || 0;
+          let delta = (Math.random() - 0.5) * 2; // -1 to +1 change
+
+          if (s.type === 'Moisture') {
+            num = Math.max(10, Math.min(100, Math.round(num + delta * 3)));
+            s.reading = num + '%';
+            // Sync moisture back to bound field moisture levels!
+            const f = fields.find(field => field.id === s.fieldId);
+            if (f) {
+              f.moisture = num;
+              f.status = num < 40 ? 'dry' : 'growing';
+            }
+          } 
+          else if (s.type === 'Temperature') {
+            num = Math.max(10, Math.min(45, Math.round((num + delta * 0.5) * 10) / 10));
+            s.reading = num + '°C';
+          } 
+          else if (s.type === 'Humidity') {
+            num = Math.max(20, Math.min(95, Math.round(num + delta * 2)));
+            s.reading = num + '%';
+          } 
+          else if (s.type === 'pH') {
+            num = Math.max(4.5, Math.min(8.5, Math.round((num + delta * 0.05) * 100) / 100));
+            s.reading = num.toFixed(2);
+          } 
+          else if (s.type === 'Light') {
+            num = Math.max(0, Math.min(100, Math.round(num + delta * 4)));
+            s.reading = num + '%';
+          }
+        });
+
+        saveSensors();
+        saveFields();
+        renderSensors();
+        renderFields();
+      }
+
+      // CSV Export Filtered Reports
+      function exportFilteredReportsCSV() {
+        const filterField = document.getElementById('repFilterField').value;
+        const filterCrop = document.getElementById('repFilterCrop').value;
+        const filterDate = document.getElementById('repFilterDate').value;
+
+        const filtered = logs.filter(log => {
+          if (filterField !== 'all' && log.field !== filterField) return false;
+          if (filterCrop !== 'all' && log.crop !== filterCrop) return false;
+          if (filterDate && log.date !== filterDate) return false;
+          return true;
+        });
+
+        const lines = [];
+        lines.push('Date,Field Name,Crop,Soil Moisture,Yield Forecast,Status');
+        filtered.forEach(log => {
+          lines.push(`"${log.date}","${log.field}","${log.crop}","${log.moisture}","${log.yield}","${log.status}"`);
+        });
+
+        const csv = lines.join('\n');
+        const blob = new Blob([csv], {type: 'text/csv;charset=utf-8;'});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `stackly_farm_operational_report_${new Date().toISOString().split('T')[0]}.csv`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+        
+        addActivity('Export', 'Operational dataset exported to CSV format');
+      }
+
+      // --- Download Charts PNG ---
+      function downloadChartsPNG() {
+        const canvases = [{id:'yieldChart',name:'yield-trend.png'},{id:'sensorChart',name:'sensor-activity.png'}];
+        canvases.forEach(c => {
+          const el = document.getElementById(c.id);
+          if (!el) return;
+          try {
+            const dataURL = el.toDataURL('image/png');
+            const a = document.createElement('a'); a.href = dataURL; a.download = c.name; document.body.appendChild(a); a.click(); a.remove();
+          } catch (err) { console.warn('Download chart failed', err); }
+        });
+      }
+
+
+      // ── SYSTEM BOOTSTRAP INITIALIZATION ──
+      
+      loadStateFromStorage();
+      renderProfileInfo();
+      updateKPIs();
+      renderFields();
+      renderSensors();
+      renderActivities();
+      populateReportFilters();
+      renderLogs();
+      setupRouting();
+      setupFormHandlers();
+
+      // Logout handlers
+      const sidebarLogout = document.getElementById('sidebarLogout');
+      if (sidebarLogout) sidebarLogout.addEventListener('click', function(e){ e.preventDefault(); try{ localStorage.removeItem('stackly_user'); }catch(e){} window.location.href='index.html'; });
+      const logoutBtn = document.getElementById('logoutBtn') || document.getElementById('logoutTop');
+      if (logoutBtn) logoutBtn.addEventListener('click', function(){ try{ localStorage.removeItem('stackly_user'); }catch(e){} window.location.href='index.html'; });
+
+      // Quick actions wiring
+      const openContact = document.getElementById('openContact2') || document.getElementById('openContact');
+      if (openContact) openContact.addEventListener('click', () => window.location.href='contact.html');
+      
+      const viewReports2 = document.getElementById('viewReports2');
+      if (viewReports2) viewReports2.addEventListener('click', () => { window.location.hash = 'reports'; });
+
+      const exportBtn = document.getElementById('exportReport') || document.getElementById('exportReport2') || document.getElementById('btnExportReports');
+      if (exportBtn) exportBtn.addEventListener('click', exportFilteredReportsCSV);
+      
+      const exportTop = document.getElementById('exportTop');
+      if (exportTop) exportTop.addEventListener('click', exportFilteredReportsCSV);
+
+      const downloadTop = document.getElementById('downloadTop');
+      if (downloadTop) downloadTop.addEventListener('click', downloadChartsPNG);
+
+      // --- Charts initialization (sample data) ---
+      try {
+        const yieldLabels = ['Jan','Feb','Mar','Apr','May','Jun','Jul'];
+        const yieldDataArr = [1.6,1.8,2.0,2.1,2.0,2.3,2.4];
+        const sensorLabels = ['Soil','Temp','Humidity','pH','Light'];
+        const sensorDataArr = [12,9,11,7,8];
+
+        const yieldCtx = document.getElementById('yieldChart');
+        let yieldChart = null;
+        if (yieldCtx) {
+          yieldChart = new Chart(yieldCtx, {
+            type: 'line',
+            data: {
+              labels: yieldLabels,
+              datasets: [{ label: 'Yield (t)', data: yieldDataArr, borderColor: '#b5e853', backgroundColor: 'rgba(181,232,83,0.1)', tension:0.35, pointRadius:4, pointBackgroundColor:'#fff', pointBorderWidth:2 }]
+            },
+            options: {
+              responsive:true,
+              maintainAspectRatio:false,
+              plugins:{
+                legend:{display:true,position:'top', labels:{color:'rgba(255,255,255,0.7)', font:{family:'DM Sans'}}},
+                tooltip:{enabled:true, mode:'index', intersect:false}
+              },
+              scales:{
+                x:{ grid:{color:'rgba(255,255,255,0.08)'}, ticks:{color:'rgba(255,255,255,0.7)', font:{family:'DM Sans'}} },
+                y:{ beginAtZero:false, grid:{color:'rgba(255,255,255,0.08)'}, ticks:{color:'rgba(255,255,255,0.7)', font:{family:'DM Sans'}} }
+              }
+            }
+          });
+        }
+
+        const sensorCtx = document.getElementById('sensorChart');
+        let sensorChart = null;
+        if (sensorCtx) {
+          sensorChart = new Chart(sensorCtx, {
+            type: 'bar',
+            data: { labels: sensorLabels, datasets:[{ label:'Active Counts', data:sensorDataArr, backgroundColor:['#b5e853','#fbbf24','#8b5e3c','#4a9e4a','#d97706'], borderRadius:6 }] },
+            options:{
+              responsive:true,
+              maintainAspectRatio:false,
+              plugins:{
+                legend:{display:true,position:'top', labels:{color:'rgba(255,255,255,0.7)', font:{family:'DM Sans'}}},
+                tooltip:{enabled:true}
+              },
+              scales:{
+                x:{ grid:{color:'rgba(255,255,255,0.08)'}, ticks:{color:'rgba(255,255,255,0.7)', font:{family:'DM Sans'}} },
+                y:{ beginAtZero:true, grid:{color:'rgba(255,255,255,0.08)'}, ticks:{color:'rgba(255,255,255,0.7)', font:{family:'DM Sans'}} }
+              }
+            }
+          });
+        }
+      } catch (err) { console.warn('Chart error', err); }
+
+      // Equalize panel heights for structured layout
+      function equalizePanels() {
+        try {
+          const leftPanels = Array.from(document.querySelectorAll('.main-grid > div > .panel'));
+          const rightPanels = Array.from(document.querySelectorAll('.main-grid > aside > .panel'));
+          const allGroups = [leftPanels, rightPanels];
+          allGroups.forEach(group => {
+            if (!group || group.length === 0) return;
+            let maxH = 0;
+            group.forEach(el => { el.style.minHeight = ''; const h = el.getBoundingClientRect().height; if (h > maxH) maxH = h; });
+            group.forEach(el => el.style.minHeight = (maxH) + 'px');
+          });
+        } catch (e) { /* ignore */ }
+      }
+
+      let _eqT;
+      window.addEventListener('load', () => { equalizePanels(); setTimeout(equalizePanels, 300); });
+      window.addEventListener('resize', () => { clearTimeout(_eqT); _eqT = setTimeout(equalizePanels, 180); });
+    })();
+  </script>
+</body>
+</html>

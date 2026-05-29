@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stackly Farm — Future of Agriculture</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300&family=DM+Sans:wght@300;400;500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- LOADER -->
+  <div id="loader">
+    <div class="loader-logo"><img src="logo.webp" alt="Stackly Farm Logo"></div>
+    <div class="loader-bar">
+      <div class="loader-fill"></div>
+    </div>
+  </div>
+
+  <!-- FLOATING PARTICLES -->
+  <div id="particles"></div>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <a class="nav-logo" href="index.html"><img src="logo.webp" alt="Stackly Farm Logo"></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="auth.html?mode=login" class="btn btn-ghost ripple-btn" style="padding:10px 20px">Sign In</a>
+      <a href="auth.html?mode=register" class="btn btn-solid ripple-btn" style="padding:10px 20px">Register</a>
+    </div>
+    <div class="hamburger"><span></span><span></span><span></span></div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="home">
+    <div class="hero-bg-decor"></div>
+    <div class="hero-left">
+      <div class="hero-eyebrow">Future of Agriculture · Est. 2001</div>
+      <h1 class="hero-h1" id="heroTitle"></h1>
+      <p class="hero-sub">Premium smart farming: AI-powered crop management, organic production standards, and
+        sustainable solutions for tomorrow's harvest — all in one ecosystem.</p>
+      <div class="hero-ctas">
+        <a href="services.html" class="btn btn-solid ripple-btn" style="padding:14px 32px;font-size:15px">Explore
+          Platform</a>
+        <a href="about.html" class="btn btn-outline light" style="padding:14px 32px;font-size:15px">Watch Story</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-num" id="c1">0</div>
+          <div class="stat-label">Customers</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num" id="c2">0</div>
+          <div class="stat-label">Farm Experts</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num" id="c3">0</div>
+          <div class="stat-label">Years Active</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <img class="hero-img-main" src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?fm=webp&q=80&w=900"
+        alt="Smart Farm">
+      <div class="hero-badge">
+        <div class="hero-badge-label">Partner Farms</div>
+        <div class="hero-badge-val">500+</div>
+        <div class="hero-badge-sub">🌾 AI Soil Analysis</div>
+      </div>
+      <div class="hero-badge2">
+        <div class="hero-badge2-val">100% Organic</div>
+        <div class="hero-badge2-sub">⭐⭐⭐⭐⭐ AgriTech Review 2025</div>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <div class="scroll-dot"></div>
+      <div class="scroll-dot"></div>
+      <div class="scroll-dot"></div>
+    </div>
+  </section>
+
+  <!-- TICKER -->
+  <div class="ticker">
+    <div class="ticker-inner">
+      <span>🌿 Organic Farming</span><span>🚜 Smart Equipment</span><span>💧 Water Efficiency</span>
+      <span>🌾 Crop Innovation</span><span>🤖 AI Agriculture</span><span>🌍 Sustainable Future</span>
+      <span>🥦 Fresh Produce</span><span>📡 IoT Sensors</span>
+      <span>🌿 Organic Farming</span><span>🚜 Smart Equipment</span><span>💧 Water Efficiency</span>
+      <span>🌾 Crop Innovation</span><span>🤖 AI Agriculture</span><span>🌍 Sustainable Future</span>
+      <span>🥦 Fresh Produce</span><span>📡 IoT Sensors</span>
+    </div>
+  </div>
+
+  <!-- ABOUT US -->
+  <section id="about-us">
+    <div class="about-container">
+      <div class="about-header fade-up">
+        <div class="section-eyebrow">Our Story</div>
+        <h2 class="section-h2">About <em>Stackly Farm</em></h2>
+        <p class="section-sub">Revolutionizing agriculture through innovation, sustainability, and farmer empowerment
+          since 2001.</p>
+      </div>
+      <div class="about-grid">
+        <div class="about-content fade-up">
+          <div class="about-text">
+            <h3>Mission & Vision</h3>
+            <p>Stackly Farm was founded with a simple yet powerful mission: to bridge the gap between traditional
+              farming wisdom and cutting-edge agricultural technology. We believe that farmers deserve tools that
+              respect the land, enhance productivity, and secure their livelihoods.</p>
+            <p>Our vision is to create a sustainable agricultural ecosystem where technology amplifies human expertise,
+              not replaces it. Every farmer, regardless of farm size or location, should have access to world-class
+              farming intelligence and support.</p>
+          </div>
+          <div class="about-stats-box">
+            <div class="about-stat-item">
+              <div class="stat-big">25+</div>
+              <div class="stat-text">Years of Excellence</div>
+            </div>
+            <div class="about-stat-item">
+              <div class="stat-big">50,000+</div>
+              <div class="stat-text">Acres Managed</div>
+            </div>
+            <div class="about-stat-item">
+              <div class="stat-big">15M+</div>
+              <div class="stat-text">Tonnes Harvested</div>
+            </div>
+          </div>
+        </div>
+        <div class="about-image fade-up">
+          <img src="https://images.unsplash.com/photo-1574943320219-553eb213f72d?fm=webp&q=80&w=800"
+            alt="Sustainable Agriculture">
+          <div class="about-image-tag">100% Commitment to Sustainability</div>
+        </div>
+      </div>
+      <div class="about-values fade-up">
+        <h3 style="text-align:center;margin-bottom:40px">Core Values</h3>
+        <div class="values-grid">
+          <div class="value-card">
+            <div class="value-icon">🌱</div>
+            <div class="value-title">Sustainability</div>
+            <div class="value-desc">Every decision we make prioritizes environmental health and long-term soil fertility
+              for future generations.</div>
+          </div>
+          <div class="value-card">
+            <div class="value-icon">🔬</div>
+            <div class="value-title">Innovation</div>
+            <div class="value-desc">We invest heavily in R&D to bring AI, IoT, and genomics breakthroughs directly to
+              farmers.</div>
+          </div>
+          <div class="value-card">
+            <div class="value-icon">🤝</div>
+            <div class="value-title">Empowerment</div>
+            <div class="value-desc">We empower farmers with knowledge, tools, and market access to run their businesses
+              independently.</div>
+          </div>
+          <div class="value-card">
+            <div class="value-icon">🌍</div>
+            <div class="value-title">Global Impact</div>
+            <div class="value-desc">Working across 40+ countries, creating food security and rural prosperity at scale.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY US -->
+  <section id="why">
+    <div class="fade-up" style="position:relative;z-index:1;">
+      <div class="section-eyebrow">Why Choose Us</div>
+      <h2 class="section-h2" style="color:white">Smart Farming <em>Powered by Nature</em></h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-card fade-up"><span class="why-icon">🌐</span>
+        <div class="why-title">Global Supply Chain</div>
+        <div class="why-desc">Direct farm-to-market connections in 40+ countries, eliminating intermediaries and
+          reducing cost.</div>
+      </div>
+      <div class="why-card fade-up" style="transition-delay:.1s"><span class="why-icon">🧬</span>
+        <div class="why-title">Soil DNA Testing</div>
+        <div class="why-desc">Hyper-local soil genomics analysis for precision fertilisation unique to each plot.</div>
+      </div>
+      <div class="why-card fade-up" style="transition-delay:.2s"><span class="why-icon">☀️</span>
+        <div class="why-title">Solar-Powered Ops</div>
+        <div class="why-desc">100% renewable energy powering our cold-storage, processing, and logistics network
+          worldwide.</div>
+      </div>
+      <div class="why-card fade-up" style="transition-delay:.3s"><span class="why-icon">📊</span>
+        <div class="why-title">Harvest Analytics</div>
+        <div class="why-desc">Predictive analytics with 94% yield accuracy, helping farmers plan resources months ahead.
+        </div>
+      </div>
+      <div class="why-card fade-up" style="transition-delay:.4s"><span class="why-icon">🛡️</span>
+        <div class="why-title">Crop Insurance AI</div>
+        <div class="why-desc">Automated climate-risk assessment and instant insurance claim processing in under 24
+          hours.</div>
+      </div>
+      <div class="why-card fade-up" style="transition-delay:.5s"><span class="why-icon">🤝</span>
+        <div class="why-title">Community Network</div>
+        <div class="why-desc">12,000+ farmer network sharing knowledge, resources, and market access across regions.
+        </div>
+      </div>
+    </div>
+    <div class="why-stats fade-up">
+      <div>
+        <div class="why-stat-num" id="ws1">0</div>
+        <div class="why-stat-label">Organic Farms</div>
+      </div>
+      <div>
+        <div class="why-stat-num" id="ws2">0</div>
+        <div class="why-stat-label">Happy Customers</div>
+      </div>
+      <div>
+        <div class="why-stat-num" id="ws3">0</div>
+        <div class="why-stat-label">Satisfaction Rate</div>
+      </div>
+      <div>
+        <div class="why-stat-num" id="ws4">0</div>
+        <div class="why-stat-label">Countries Served</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section id="process">
+    <div class="process-header fade-up">
+      <div class="section-eyebrow">How It Works</div>
+      <h2 class="section-h2">From Soil to <em>Your Table</em></h2>
+    </div>
+    <div class="process-steps" id="processSteps">
+      <div class="process-line">
+        <div class="process-line-fill" id="processLineFill"></div>
+      </div>
+      <div class="process-step fade-up">
+        <div class="process-num">🧪</div>
+        <div class="process-step-title">Soil Analysis</div>
+        <div class="process-step-desc">AI-powered soil testing identifies optimal crops and amendments for your specific
+          land.</div>
+      </div>
+      <div class="process-step fade-up" style="transition-delay:.15s">
+        <div class="process-num">🌱</div>
+        <div class="process-step-title">Smart Planting</div>
+        <div class="process-step-desc">Drone-guided precision seeding and automated irrigation for every seedling.</div>
+      </div>
+      <div class="process-step fade-up" style="transition-delay:.3s">
+        <div class="process-num">📡</div>
+        <div class="process-step-title">Live Monitoring</div>
+        <div class="process-step-desc">24/7 sensor data streams with instant alerts for weather, pests, and crop health.
+        </div>
+      </div>
+      <div class="process-step fade-up" style="transition-delay:.45s">
+        <div class="process-num">🚛</div>
+        <div class="process-step-title">Harvest & Deliver</div>
+        <div class="process-step-desc">Cold-chain logistics and blockchain traceability from field to final destination.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="testimonials">
+    <div class="testimonials-header fade-up">
+      <div class="section-eyebrow">What People Say</div>
+      <h2 class="section-h2">Farmers & Customers <em>Speak Honestly</em></h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card fade-up zoom-in">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-quote">"Stackly's AI crop management system doubled our wheat yield in a single season. The
+          soil analytics alone paid for the entire subscription in the first month."</div>
+        <div class="testi-author">
+          <div class="testi-avatar">R</div>
+          <div>
+            <div class="testi-name">Ramesh Patel</div>
+            <div class="testi-role">Wheat Farmer, Punjab</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card fade-up zoom-in" style="transition-delay:.1s">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-quote">"The organic vegetables quality is extraordinary. Fresh, chemical-free, and delivered
+          within 4 hours of harvest. Nothing else compares to this level of freshness."</div>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:var(--g400)">P</div>
+          <div>
+            <div class="testi-name">Priya Mehta</div>
+            <div class="testi-role">Home Customer, Bangalore</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card fade-up zoom-in" style="transition-delay:.2s">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-quote">"Best agriculture support system for modern farming. Their expert team is always
+          available and the tech actually works in real fields, not just demos."</div>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:var(--brown)">A</div>
+          <div>
+            <div class="testi-name">Arjun Sharma</div>
+            <div class="testi-role">Agro Expert, Maharashtra</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section id="newsletter">
+    <div class="section-eyebrow fade-up" style="position:relative;z-index:1;">Stay Updated</div>
+    <h2 class="section-h2 fade-up" style="position:relative;z-index:1;">Get Farm-Fresh <em>Insights Weekly</em></h2>
+    <p class="section-sub fade-up" style="position:relative;z-index:1;margin:0 auto">Farming tips, organic news, AI
+      agriculture updates, and exclusive offers straight to your inbox.</p>
+    <div class="newsletter-form fade-up">
+      <input type="email" placeholder="Your email address" id="nl-email">
+      <button class="btn btn-solid ripple-btn" onclick="subscribe()"
+        style="padding:14px 28px;white-space:nowrap">Subscribe</button>
+    </div>
+    <div class="newsletter-note" id="nl-msg">No spam. Unsubscribe anytime. 12,000+ subscribers.</div>
+  </section>
+
+  <!-- CTA -->
+  <section id="cta">
+    <div class="fade-up">
+      <div class="section-eyebrow">Ready to Begin?</div>
+      <h2 class="section-h2">Grow With Nature, <em>Lead With Technology</em></h2>
+      <p class="section-sub" style="max-width:500px;margin-top:12px">Join 12,000+ forward-thinking farmers and food
+        brands already on the Stackly platform.</p>
+    </div>
+    <div class="cta-btns fade-up">
+      <a href="contact.html" class="btn btn-solid ripple-btn" style="padding:16px 36px;font-size:16px">Start Today</a>
+      <a href="about.html" class="btn btn-outline" style="padding:16px 36px;font-size:16px">Learn More</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <a class="footer-logo" href="index.html"><img src="logo.webp" alt="Stackly Farm Logo"></a>
+        <div class="footer-desc">Premium agriculture solutions for smart farming, organic production, and sustainable
+          future growth. Bridging tradition and technology since 2001.</div>
+        <div class="footer-socials">
+          <a class="footer-social" href="404.html">𝕏</a>
+          <a class="footer-social" href="404.html">in</a>
+          <a class="footer-social" href="404.html">f</a>
+          <a class="footer-social" href="404.html">▶</a>
+          <a class="footer-social" href="404.html">ig</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Navigation</div>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Services</div>
+        <ul class="footer-links">
+          <li><a href="services.html">Organic Farming</a></li>
+          <li><a href="services.html">Smart Agriculture</a></li>
+          <li><a href="services.html">Crop Management</a></li>
+          <li><a href="services.html">Modern Equipment</a></li>
+          <li><a href="services.html">AI Analytics</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Contact</div>
+        <ul class="footer-links" style="gap:12px">
+          <li style="color:rgba(255,255,255,.5);font-size:14px">📍 Bangalore, Karnataka, India</li>
+          <li style="color:rgba(255,255,255,.5);font-size:14px">📞 +91 98881 55661</li>
+          <li style="color:rgba(255,255,255,.5);font-size:14px">✉️ hello@stackly.com</li>
+          <li style="color:rgba(255,255,255,.5);font-size:14px">🕐 Mon–Sat, 9AM–6PM IST</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Stackly Farm. All Rights Reserved.</span>
+      <span>Smart Agriculture Solutions</span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

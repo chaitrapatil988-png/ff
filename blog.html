@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog — Stackly Farm</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .blog-featured {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+      background: var(--dark); border-radius: 24px; overflow: hidden;
+      margin-bottom: 56px; box-shadow: 0 24px 70px rgba(0,0,0,.15);
+    }
+    .blog-featured-img { width:100%; height:100%; object-fit:cover; min-height:380px; }
+    .blog-featured-body { padding: 48px 40px; display: flex; flex-direction: column; justify-content: center; }
+    .blog-featured-tag {
+      display: inline-block; padding: 4px 12px; border-radius: 50px;
+      background: rgba(181,232,83,.15); color: var(--accent); font-size: 11px;
+      font-weight: 500; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px;
+    }
+    .blog-featured-title { font-family: var(--font-head); font-size: 30px; font-weight: 600; color: var(--white); line-height: 1.25; margin-bottom: 14px; }
+    .blog-featured-excerpt { font-size: 15px; color: rgba(255,255,255,.6); line-height: 1.7; margin-bottom: 28px; }
+    .blog-featured-meta { display: flex; align-items: center; gap: 14px; }
+    .blog-featured-avatar { width:40px; height:40px; border-radius:50%; background:var(--g300); color:var(--white); display:flex; align-items:center; justify-content:center; font-weight:600; font-size:14px; }
+    .blog-featured-author { font-size:14px; font-weight:500; color:var(--white); }
+    .blog-featured-date { font-size:12px; color:rgba(255,255,255,.4); }
+    .blog-filters { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:36px; }
+    .blog-filter-btn {
+      padding: 8px 18px; border-radius: 50px; font-size: 13px; font-weight: 500;
+      border: 1.5px solid rgba(30,74,32,.2); color: var(--muted);
+      cursor: none; transition: all 0.25s; background: transparent;
+    }
+    .blog-filter-btn.active, .blog-filter-btn:hover {
+      background: var(--g300); color: var(--white); border-color: var(--g300);
+    }
+    @media (max-width: 700px) {
+      .blog-featured { grid-template-columns: 1fr; }
+      .blog-featured-img { min-height: 200px; }
+      .blog-featured-body { padding: 28px 20px; }
+      .blog-featured-title { font-size: 22px; }
+      .blog-featured-excerpt { font-size: 14px; margin-bottom: 20px; }
+      .blog-filters { justify-content: flex-start; }
+      .blog-filter-btn { padding: 6px 14px; font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="loader">
+    <div class="loader-logo"><img src="logo.webp" alt="Stackly Farm Logo"></div>
+    <div class="loader-bar"><div class="loader-fill"></div></div>
+  </div>
+
+  <div id="cursor"></div>
+  <div id="cursor-ring"></div>
+  <div id="particles"></div>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <a class="nav-logo" href="index.html"><img src="logo.webp" alt="Stackly Farm Logo"></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="auth.html?mode=login" class="btn btn-ghost ripple-btn" style="padding:10px 20px">Sign In</a>
+      <a href="auth.html?mode=register" class="btn btn-solid ripple-btn" style="padding:10px 20px">Register</a>
+    </div>
+    <div class="hamburger"><span></span><span></span><span></span></div>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <div class="page-hero">
+    <div class="page-hero-decor"></div>
+    <div class="page-hero-content fade-up">
+      <div class="section-eyebrow">Knowledge Hub</div>
+      <h1>Farm Fresh <em>Ideas &</em><br><em>Agri Insights</em></h1>
+      <p>Expert articles, research, tips, and stories from the frontlines of modern agriculture — written by farmers and scientists for farmers.</p>
+    </div>
+  </div>
+
+  <!-- BLOG SECTION -->
+  <section class="blog-section">
+
+    <!-- Featured Post -->
+    <div class="fade-up" style="margin-bottom:56px">
+      <div class="section-eyebrow">Featured Article</div>
+    </div>
+    <div class="blog-featured fade-up">
+      <img class="blog-featured-img" src="https://images.unsplash.com/photo-1628352081506-83c43123ed6d?fm=webp&q=80&w=700" alt="Featured">
+      <div class="blog-featured-body">
+        <div class="blog-featured-tag">🤖 AI & Technology</div>
+        <div class="blog-featured-title">How AI Is Predicting Monsoon Patterns with 91% Accuracy — and What It Means for Indian Farmers</div>
+        <div class="blog-featured-excerpt">Our climate science team partnered with IITB to develop a model that analyses 40 years of satellite data, ocean temperature gradients, and historical crop records to give farmers actionable planting windows weeks in advance.</div>
+        <div class="blog-featured-meta">
+          <div class="blog-featured-avatar">SK</div>
+          <div>
+            <div class="blog-featured-author">Dr. Sanjay Kulkarni</div>
+            <div class="blog-featured-date">May 14, 2026 · 8 min read</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="blog-filters fade-up">
+      <button class="blog-filter-btn active" data-category="all">All</button>
+      <button class="blog-filter-btn" data-category="ai-technology">AI & Technology</button>
+      <button class="blog-filter-btn" data-category="organic-farming">Organic Farming</button>
+      <button class="blog-filter-btn" data-category="soil-science">Soil Science</button>
+      <button class="blog-filter-btn" data-category="market-insights">Market Insights</button>
+      <button class="blog-filter-btn" data-category="success-stories">Success Stories</button>
+    </div>
+
+    <!-- Blog Grid -->
+    <div class="blog-grid">
+      <div class="blog-card fade-up" data-category="soil-science">
+        <img class="blog-card-img" src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?fm=webp&q=80&w=500" alt="Soil">
+        <div class="blog-card-body">
+          <div class="blog-cat">🌱 Soil Science</div>
+          <div class="blog-card-title">The Microbiome Revolution: Why What's Beneath Your Soil Matters More Than What's Above</div>
+          <div class="blog-card-excerpt">A thriving soil microbiome can replace up to 60% of synthetic fertilizers while building long-term fertility. Here's what you need to know.</div>
+          <div class="blog-meta" style="justify-content:space-between">
+            <div style="display:flex;align-items:center;gap:10px">
+              <div class="blog-author-avatar">AR</div>
+              <div><div class="blog-author-name">Dr. Anita Reddy</div><div class="blog-date">Apr 28, 2026</div></div>
+            </div>
+            <a href="404.html" class="blog-read-more">Read →</a>
+          </div>
+        </div>
+      </div>
+      <div class="blog-card fade-up" style="transition-delay:.1s" data-category="ai-technology">
+        <img class="blog-card-img" src="https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?fm=webp&q=80&w=500" alt="Drone">
+        <div class="blog-card-body">
+          <div class="blog-cat">🤖 Technology</div>
+          <div class="blog-card-title">Drone Seeding: How Precision Air-Drops Are Cutting Labour Costs by 70%</div>
+          <div class="blog-card-excerpt">A new generation of autonomous drones can plant, fertilise, and monitor 500 acres in a single day — with better uniformity than manual methods.</div>
+          <div class="blog-meta" style="justify-content:space-between">
+            <div style="display:flex;align-items:center;gap:10px">
+              <div class="blog-author-avatar" style="background:var(--g400)">RP</div>
+              <div><div class="blog-author-name">Rajan Pillai</div><div class="blog-date">Apr 15, 2026</div></div>
+            </div>
+            <a href="#" class="blog-read-more">Read →</a>
+          </div>
+        </div>
+      </div>
+      <div class="blog-card fade-up" style="transition-delay:.2s" data-category="organic-farming">
+        <img class="blog-card-img" src="https://images.unsplash.com/photo-1500937386664-56d1dfef3854?fm=webp&q=80&w=500" alt="Organic">
+        <div class="blog-card-body">
+          <div class="blog-cat">🌿 Organic Farming</div>
+          <div class="blog-card-title">Getting Organic Certification in India: A Complete Step-by-Step Guide for 2026</div>
+          <div class="blog-card-excerpt">From NPOP registration to EU import compliance — everything you need to convert your farm and command the organic premium.</div>
+          <div class="blog-meta" style="justify-content:space-between">
+            <div style="display:flex;align-items:center;gap:10px">
+              <div class="blog-author-avatar" style="background:var(--brown)">MK</div>
+              <div><div class="blog-author-name">Meena Krishnan</div><div class="blog-date">Mar 30, 2026</div></div>
+            </div>
+            <a href="#" class="blog-read-more">Read →</a>
+          </div>
+        </div>
+      </div>
+      <div class="blog-card fade-up" data-category="market-insights">
+        <img class="blog-card-img" src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?fm=webp&q=80&w=500" alt="Market">
+        <div class="blog-card-body">
+          <div class="blog-cat">📊 Market Insights</div>
+          <div class="blog-card-title">Global Organic Food Market to Hit $600B by 2030 — Here's Where Indian Farmers Fit</div>
+          <div class="blog-card-excerpt">India's organic export opportunity is enormous. We break down the top 10 crops, their price premiums, and the logistics you need to access EU & US markets.</div>
+          <div class="blog-meta" style="justify-content:space-between">
+            <div style="display:flex;align-items:center;gap:10px">
+              <div class="blog-author-avatar" style="background:#5a7a8a">VB</div>
+              <div><div class="blog-author-name">Vinay Bhat</div><div class="blog-date">Mar 12, 2026</div></div>
+            </div>
+            <a href="#" class="blog-read-more">Read →</a>
+          </div>
+        </div>
+      </div>
+      <div class="blog-card fade-up" style="transition-delay:.1s" data-category="ai-technology">
+        <img class="blog-card-img" src="https://images.unsplash.com/photo-1508193638397-1c4234db14d8?fm=webp&q=80&w=500" alt="Water">
+        <div class="blog-card-body">
+          <div class="blog-cat">💧 Water Management</div>
+          <div class="blog-card-title">Drip Irrigation + AI Scheduling: How One Maharashtra Farm Cut Water Use by 45%</div>
+          <div class="blog-card-excerpt">A case study from Nashik where Stackly's adaptive irrigation system combined soil moisture sensors with weather predictions to save millions of litres.</div>
+          <div class="blog-meta" style="justify-content:space-between">
+            <div style="display:flex;align-items:center;gap:10px">
+              <div class="blog-author-avatar" style="background:var(--g300)">SJ</div>
+              <div><div class="blog-author-name">Suresh Jadhav</div><div class="blog-date">Feb 20, 2026</div></div>
+            </div>
+            <a href="#" class="blog-read-more">Read →</a>
+          </div>
+        </div>
+      </div>
+      <div class="blog-card fade-up" style="transition-delay:.2s" data-category="success-stories">
+        <img class="blog-card-img" src="https://images.unsplash.com/photo-1595348020949-87cdfbb44174?fm=webp&q=80&w=500" alt="Story">
+        <div class="blog-card-body">
+          <div class="blog-cat">🌟 Success Story</div>
+          <div class="blog-card-title">From ₹2L Loss to ₹18L Profit: Ramesh Patel's Two-Year Stackly Journey</div>
+          <div class="blog-card-excerpt">A Punjab wheat farmer went from the brink of debt to becoming a regional trainer for other Stackly members. This is his story, in his words.</div>
+          <div class="blog-meta" style="justify-content:space-between">
+            <div style="display:flex;align-items:center;gap:10px">
+              <div class="blog-author-avatar" style="background:var(--g400)">RP</div>
+              <div><div class="blog-author-name">Ramesh Patel</div><div class="blog-date">Jan 8, 2026</div></div>
+            </div>
+            <a href="#" class="blog-read-more">Read →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section id="newsletter">
+    <div class="section-eyebrow fade-up" style="position:relative;z-index:1;">Stay Updated</div>
+    <h2 class="section-h2 fade-up" style="position:relative;z-index:1;">Get Farm-Fresh <em>Insights Weekly</em></h2>
+    <p class="section-sub fade-up" style="position:relative;z-index:1;margin:0 auto">Farming tips, organic news, AI agriculture updates, and exclusive offers straight to your inbox.</p>
+    <div class="newsletter-form fade-up">
+      <input type="email" placeholder="Your email address" id="nl-email">
+      <button class="btn btn-solid ripple-btn" onclick="subscribe()" style="padding:14px 28px;white-space:nowrap">Subscribe</button>
+    </div>
+    <div class="newsletter-note" id="nl-msg">No spam. Unsubscribe anytime. 12,000+ subscribers.</div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <a class="footer-logo" href="index.html"><img src="logo.webp" alt="Stackly Farm Logo"></a>
+        <div class="footer-desc">Premium agriculture solutions for smart farming, organic production, and sustainable future growth. Bridging tradition and technology since 2001.</div>
+        <div class="footer-socials">
+          <a class="footer-social" href="404.html">𝕏</a>
+          <a class="footer-social" href="404.html">in</a>
+          <a class="footer-social" href="404.html">f</a>
+          <a class="footer-social" href="404.html">▶</a>
+          <a class="footer-social" href="404.html">ig</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Navigation</div>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Services</div>
+        <ul class="footer-links">
+          <li><a href="services.html">Organic Farming</a></li>
+          <li><a href="services.html">Smart Agriculture</a></li>
+          <li><a href="services.html">Crop Management</a></li>
+          <li><a href="services.html">Modern Equipment</a></li>
+          <li><a href="services.html">AI Analytics</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Contact</div>
+        <ul class="footer-links" style="gap:12px">
+          <li style="color:rgba(255,255,255,.5);font-size:14px">📍 Bangalore, Karnataka, India</li>
+          <li style="color:rgba(255,255,255,.5);font-size:14px">📞 +91 98881 55661</li>
+          <li style="color:rgba(255,255,255,.5);font-size:14px">✉️ hello@stackly.com</li>
+          <li style="color:rgba(255,255,255,.5);font-size:14px">🕐 Mon–Sat, 9AM–6PM IST</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Stackly Farm. All Rights Reserved.</span>
+      <span>Smart Agriculture Solutions</span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    // Blog filter buttons — show/hide cards by category
+    document.querySelectorAll('.blog-filter-btn').forEach(btn => {
+      btn.addEventListener('click', function () {
+        // Update active button
+        document.querySelectorAll('.blog-filter-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+
+        const selected = this.dataset.category;
+        const cards = document.querySelectorAll('.blog-grid .blog-card');
+
+        cards.forEach(card => {
+          const match = selected === 'all' || card.dataset.category === selected;
+          if (match) {
+            card.style.display = '';
+            // Trigger fade-in
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            requestAnimationFrame(() => {
+              card.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+              card.style.opacity = '1';
+              card.style.transform = 'translateY(0)';
+            });
+          } else {
+            card.style.transition = 'opacity 0.25s ease';
+            card.style.opacity = '0';
+            setTimeout(() => { card.style.display = 'none'; }, 250);
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

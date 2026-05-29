@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Stackly Farm</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="loader">
+    <div class="loader-logo"><img src="logo.webp" alt="Stackly Farm Logo"></div>
+    <div class="loader-bar"><div class="loader-fill"></div></div>
+  </div>
+
+  <div id="cursor"></div>
+  <div id="cursor-ring"></div>
+  <div id="particles"></div>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <a class="nav-logo" href="index.html"><img src="logo.webp" alt="Stackly Farm Logo"></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="auth.html?mode=login" class="btn btn-ghost ripple-btn" style="padding:10px 20px">Sign In</a>
+      <a href="auth.html?mode=register" class="btn btn-solid ripple-btn" style="padding:10px 20px">Register</a>
+    </div>
+    <div class="hamburger"><span></span><span></span><span></span></div>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <div class="page-hero">
+    <div class="page-hero-decor"></div>
+    <div class="page-hero-content fade-up">
+      <div class="section-eyebrow">Get in Touch</div>
+      <h1>Let's Grow <em>Something</em><br><em>Great Together</em></h1>
+      <p>Reach out for a free consultation, partnership inquiry, or just to say hello. Our team responds within one business day.</p>
+    </div>
+  </div>
+
+  <!-- CONTACT SECTION -->
+  <div class="contact-section">
+    <!-- Info -->
+    <div class="fade-up">
+      <div class="section-eyebrow">Contact Info</div>
+      <h2 class="section-h2">We're <em>Always Available</em></h2>
+      <p>Our farming experts and support team are ready to answer your questions, guide your journey, and connect you with the right resources.</p>
+      <div class="contact-details">
+        <div class="contact-detail">
+          <div class="contact-detail-icon">📍</div>
+          <div>
+            <div class="contact-detail-label">Address</div>
+            <div class="contact-detail-val">42 AgriTech Park, Whitefield,<br>Bangalore – 560066, Karnataka</div>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">📞</div>
+          <div>
+            <div class="contact-detail-label">Phone</div>
+            <div class="contact-detail-val">+91 98881 55661</div>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">✉️</div>
+          <div>
+            <div class="contact-detail-label">Email</div>
+            <div class="contact-detail-val">hello@stackly.com</div>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">🕐</div>
+          <div>
+            <div class="contact-detail-label">Hours</div>
+            <div class="contact-detail-val">Monday – Saturday, 9AM – 6PM IST<br>Emergency: 24/7 for Pro & Enterprise</div>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">🌐</div>
+          <div>
+            <div class="contact-detail-label">Regional Offices</div>
+            <div class="contact-detail-val">Mumbai · Delhi · Hyderabad · Chennai<br>Pune · Jaipur · Chandigarh</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form -->
+    <div class="contact-form fade-up" style="transition-delay:.15s">
+      <h3 style="font-family:var(--font-head);font-size:26px;font-weight:600;color:var(--dark);margin-bottom:6px">Send Us a Message</h3>
+      <p style="font-size:14px;color:var(--muted);margin-bottom:28px">Fill in the details below and we'll get back to you within 24 hours.</p>
+      
+      <form id="contactForm" onsubmit="submitContact(event)" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">First Name *</label>
+            <input type="text" id="cFirstName" class="form-input" placeholder="Ramesh" pattern="[A-Za-z\s]+" title="First Name must contain letters and spaces only" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Last Name *</label>
+            <input type="text" id="cLastName" class="form-input" placeholder="Patel" pattern="[A-Za-z\s]+" title="Last Name must contain letters and spaces only" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email Address *</label>
+            <input type="email" id="cEmail" class="form-input" placeholder="ramesh@gmail.com" pattern="[a-zA-Z0-9._%+-]+@gmail\.com" title="Please enter a valid Gmail address (ending in @gmail.com)" required>
+          
+        </div>
+        <div class="form-group">
+          <label class="form-label">Phone Number *</label>
+          <input type="tel" id="cPhone" class="form-input" placeholder="9876543210" pattern="[0-9]{10}" maxlength="10" title="Phone number must be exactly 10 digits" inputmode="numeric" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">I'm interested in</label>
+          <select class="form-input" style="appearance:none">
+            <option>Organic Farming Solutions</option>
+            <option>AI Smart Agriculture Platform</option>
+            <option>Crop Management</option>
+            <option>Equipment Leasing</option>
+            <option>Market Access / Export</option>
+            <option>Pricing & Plans</option>
+            <option>Partnership / Investment</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Farm Size (optional)</label>
+          <select class="form-input" style="appearance:none">
+            <option>Under 5 acres</option>
+            <option>5–25 acres</option>
+            <option>25–100 acres</option>
+            <option>100–500 acres</option>
+            <option>500+ acres</option>
+            <option>I'm not a farmer</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Message *</label>
+          <textarea id="cMessage" class="form-input" placeholder="Tell us about your farm, your challenges, or what you're hoping to achieve with Stackly..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-solid ripple-btn form-submit">Send Message 🌾</button>
+        <div class="form-success" id="formSuccess">
+          🎉 Message sent! Our team will respond within 24 hours.
+        </div>
+        <div class="form-error" id="formError" style="display:none; background: rgba(220,53,69,.08); border: 1px solid #dc3545; border-radius: 12px; padding: 16px 20px; color: #dc3545; font-size: 14px; text-align: center; margin-top: 16px;">
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MAP -->
+  <div class="map-section">
+    <div class="fade-up" style="margin-bottom:24px">
+      <div class="section-eyebrow">Find Us</div>
+      <h2 class="section-h2" style="font-size:32px">Our Bangalore <em>HQ</em></h2>
+    </div>
+    <div class="map-embed fade-up">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.0026037568!2d77.74805031482168!3d12.971590990860768!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae13ed1c04a0e3%3A0x2a87c61a9d3a6e88!2sWhitefield%2C%20Bengaluru%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1640000000000!5m2!1sen!2sin"
+        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <section style="background:var(--warm);padding:100px 5%">
+    <div class="fade-up text-center" style="margin-bottom:56px">
+      <div class="section-eyebrow">FAQ</div>
+      <h2 class="section-h2">Frequently Asked <em>Questions</em></h2>
+    </div>
+    <div style="max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:16px">
+      <div class="fade-up" style="background:var(--white);border-radius:16px;padding:24px 28px;box-shadow:var(--shadow)">
+        <div style="font-family:var(--font-head);font-size:18px;font-weight:600;color:var(--dark);margin-bottom:10px">How quickly can I get started?</div>
+        <div style="font-size:14px;color:var(--muted);line-height:1.7">Within 48 hours of signing up, our onboarding team will contact you to schedule a farm assessment. Most accounts are fully operational within 1 week.</div>
+      </div>
+      <div class="fade-up" style="background:var(--white);border-radius:16px;padding:24px 28px;box-shadow:var(--shadow)">
+        <div style="font-family:var(--font-head);font-size:18px;font-weight:600;color:var(--dark);margin-bottom:10px">Do I need any special hardware?</div>
+        <div style="font-size:14px;color:var(--muted);line-height:1.7">Our Starter plan works entirely via mobile app. Pro and Enterprise plans include IoT sensor kits that we ship and install for you at no additional setup cost.</div>
+      </div>
+      <div class="fade-up" style="background:var(--white);border-radius:16px;padding:24px 28px;box-shadow:var(--shadow)">
+        <div style="font-family:var(--font-head);font-size:18px;font-weight:600;color:var(--dark);margin-bottom:10px">Is the service available in my language?</div>
+        <div style="font-size:14px;color:var(--muted);line-height:1.7">Yes! Our app is available in Hindi, Kannada, Tamil, Telugu, Marathi, Punjabi, Gujarati, and English. Support is available in all 8 languages.</div>
+      </div>
+      <div class="fade-up" style="background:var(--white);border-radius:16px;padding:24px 28px;box-shadow:var(--shadow)">
+        <div style="font-family:var(--font-head);font-size:18px;font-weight:600;color:var(--dark);margin-bottom:10px">Can I cancel anytime?</div>
+        <div style="font-size:14px;color:var(--muted);line-height:1.7">Absolutely. All plans are month-to-month with no long-term commitment required. You can upgrade, downgrade, or cancel from your dashboard at any time.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <a class="footer-logo" href="index.html"><img src="logo.webp" alt="Stackly Farm Logo"></a>
+        <div class="footer-desc">Premium agriculture solutions for smart farming, organic production, and sustainable future growth. Bridging tradition and technology since 2001.</div>
+        <div class="footer-socials">
+          <a class="footer-social" href="404.html">𝕏</a>
+          <a class="footer-social" href="404.html">in</a>
+          <a class="footer-social" href="404.html">f</a>
+          <a class="footer-social" href="404.html">▶</a>
+          <a class="footer-social" href="404.html">ig</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Navigation</div>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Services</div>
+        <ul class="footer-links">
+          <li><a href="services.html">Organic Farming</a></li>
+          <li><a href="services.html">Smart Agriculture</a></li>
+          <li><a href="services.html">Crop Management</a></li>
+          <li><a href="services.html">Modern Equipment</a></li>
+          <li><a href="services.html">AI Analytics</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Contact</div>
+        <ul class="footer-links" style="gap:12px">
+          <li style="color:rgba(255,255,255,.5);font-size:14px">📍 Bangalore, Karnataka, India</li>
+          <li style="color:rgba(255,255,255,.5);font-size:14px">📞 +91 98881 55661</li>
+          <li style="color:rgba(255,255,255,.5);font-size:14px">✉️ hello@stackly.com</li>
+          <li style="color:rgba(255,255,255,.5);font-size:14px">🕐 Mon–Sat, 9AM–6PM IST</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Stackly Farm. All Rights Reserved.</span>
+      <span>Smart Agriculture Solutions</span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
