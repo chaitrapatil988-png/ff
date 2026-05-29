@@ -159,6 +159,11 @@ img { max-width: 100%; display: block; }
   box-shadow: 0 4px 18px rgba(181,232,83,.3);
 }
 .btn-solid:hover { background: #c8f55f; box-shadow: 0 8px 28px rgba(181,232,83,.45); }
+.btn-white {
+  background: var(--white); color: var(--dark); border: none;
+  box-shadow: 0 4px 18px rgba(255,255,255,.2);
+}
+.btn-white:hover { background: var(--cream); box-shadow: 0 8px 28px rgba(255,255,255,.35); }
 .btn-ghost {
   background: rgba(255,255,255,.08); color: var(--white); border: none;
 }

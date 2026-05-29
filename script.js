@@ -258,14 +258,9 @@
 
   /* ── AUTH TABS ────────────────────────────────────────── */
   window.switchTab = function (tab) {
-    document.querySelectorAll('.auth-tab').forEach(t => t.classList.toggle('active', t.dataset.tab === tab));
+    document.querySelectorAll('.auth-tab').forEach(t => t.classList.toggle('active', t.dataset.mode === tab));
     document.querySelectorAll('.auth-panel').forEach(p => p.style.display = p.id === tab + 'Panel' ? 'block' : 'none');
   };
-
-  // Auto-switch tab from URL param
-  const urlParams = new URLSearchParams(location.search);
-  const mode = urlParams.get('mode');
-  if (mode === 'register') { setTimeout(() => switchTab('register'), 100); }
 
   /* ── AUTH FORM ────────────────────────────────────────── */
   window.handleAuth = function (type) {
